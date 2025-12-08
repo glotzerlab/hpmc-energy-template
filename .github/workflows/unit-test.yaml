@@ -9,7 +9,7 @@ env:
 
   #############################################################################################
   # HOOMD-blue version to build.
-  HOOMD_BLUE_VERSION: v5.4.0
+  HOOMD_BLUE_VERSION: v6.0.0
   # prevent deadlocked MPI tests from causing the job to cancel
   MPIEXEC_TIMEOUT: 3000
   # allow mpirun to execute as root in the tests
@@ -41,7 +41,7 @@ jobs:
     name: Build and test [${{ matrix.name }}]
     runs-on: ubuntu-24.04
     container:
-      image: nvidia/cuda:12.5.0-devel-ubuntu22.04@sha256:4b46c69e223d971f0fb279fd6381a0f3a057e09ba6de08bfbf7db751b1ad6db1
+      image: nvidia/cuda:12.9.1-devel-ubuntu22.04@sha256:bd4e2680a261c212f1e2fea241606f71497dc67a417f73175d794ec8212b5ba8
     strategy:
       fail-fast: false
       matrix:
@@ -61,7 +61,7 @@ jobs:
 
     steps:
     - name: Checkout component
-      uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+      uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
       with:
         path: component
     - name: Restore cached HOOMD-blue build
@@ -75,14 +75,14 @@ jobs:
         apt-get update
         apt-get install git --yes
     - name: Checkout HOOMD-blue
-      uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+      uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
       with:
         repository: glotzerlab/hoomd-blue
         path: hoomd-blue
         submodules: true
         ref: ${{ env.HOOMD_BLUE_VERSION }}
     - name: Create Python Environment
-      uses: prefix-dev/setup-pixi@194d461b21b6c5717c722ffc597fa91ed2ff29fa # v0.9.1
+      uses: prefix-dev/setup-pixi@82d477f15f3a381dbcc8adc1206ce643fe110fb7 # v0.9.3
       with:
         pixi-version: v0.54.1
         cache: false
