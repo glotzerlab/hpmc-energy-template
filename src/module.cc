@@ -14,7 +14,7 @@ namespace md
 // CMakeLists.txt), prefixed with an underscore.
 PYBIND11_MODULE(_template, m)
     {
-    // TODO: Call export_Class(m) for each C++ class to be exported to Python.
+        // TODO: Call export_Class(m) for each C++ class to be exported to Python.
 
 #ifdef ENABLE_HIP
         // TODO: Call export_ClassGPU(m) for each GPU enabled C++ class to be exported
